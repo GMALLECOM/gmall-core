@@ -1,0 +1,97 @@
+openapi: 3.0.0
+info:
+  title: G-Mall Product and Review API
+  version: 1.0.0
+
+paths:
+  /reviews:
+    post:
+      description: Add a new review for a product
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: integer
+                  description: ID of the product to review
+                rating:
+                  type: integer
+                  description: Star rating of the product, from 1 to 5
+                review_text:
+                  type: string
+                  description: Text of the review
+      responses:
+        201:
+          description: Review added successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review_id:
+                    type: integer
+                  product_id:
+                    type: integer
+                  rating:
+                    type: integer
+                  review_text:
+                    type: string
+
+  /products/{product_id}:
+    get:
+      description: Get details of a product with the given product_id
+      parameters:
+        - name: product_id
+          in: path
+          description: ID of the product to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Product details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product_id:
+                    type: integer
+                  product_name:
+                    type: string
+                  product_price:
+                    type: number
+                  product_description:
+                    type: string
+                  product_image_url:
+                    type: string
+
+  /reviews/{review_id}:
+    get:
+      description: Get details of a review with the given review_id
+      parameters:
+        - name: review_id
+          in: path
+          description: ID of the review to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Review details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  review_id:
+                    type: integer
+                  product_id:
+                    type: integer
+                  rating:
+                    type: integer
+                  review_text:
+                    type: string

@@ -1,0 +1,83 @@
+openapi: 3.0.0
+info:
+  title: G-Mall Coupons and Promotions API
+  version: 1.0.0
+
+paths:
+  /coupons/{coupon_id}:
+    get:
+      description: Retrieve information about a coupon
+      parameters:
+        - name: coupon_id
+          in: path
+          description: ID of the coupon to retrieve information for
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Coupon information retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  coupon_id:
+                    type: integer
+                    description: ID of the coupon
+                  code:
+                    type: string
+                    description: Coupon code
+                  discount:
+                    type: number
+                    description: Discount amount
+                  valid_from:
+                    type: string
+                    format: date
+                    description: Start date of the coupon's validity
+                  valid_to:
+                    type: string
+                    format: date
+                    description: End date of the coupon's validity
+                  usage_limit:
+                    type: integer
+                    description: Maximum number of times the coupon can be used
+
+  /promotions/{promotion_id}:
+    get:
+      description: Retrieve information about a promotion
+      parameters:
+        - name: promotion_id
+          in: path
+          description: ID of the promotion to retrieve information for
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Promotion information retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  promotion_id:
+                    type: integer
+                    description: ID of the promotion
+                  name:
+                    type: string
+                    description: Name of the promotion
+                  description:
+                    type: string
+                    description: Description of the promotion
+                  discount:
+                    type: number
+                    description: Discount amount
+                  valid_from:
+                    type: string
+                    format: date
+                    description: Start date of the promotion's validity
+                  valid_to:
+                    type: string
+                    format: date
+                    description: End date of the promotion's validity

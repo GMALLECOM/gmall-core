@@ -1,0 +1,92 @@
+openapi: 3.0.0
+info:
+  title: G-Mall API
+  version: 1.0.0
+servers:
+  - url: https://api.g-mall.com/v1
+paths:
+  /customers/{customer_id}:
+    get:
+      description: Retrieve information about a specific customer
+      parameters:
+        - name: customer_id
+          in: path
+          description: ID of the customer to retrieve
+          required: true
+          schema:
+            $ref: '#/components/schemas/CustomerId'
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+  /inventory:
+    get:
+      description: Retrieve information about all products in the inventory
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /customers:
+    post:
+      description: Create a new customer account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewCustomer'
+      responses:
+        201:
+          description: Customer account created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+components:
+  schemas:
+    CustomerId:
+      type: string
+      description: Customer ID
+    Customer:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/CustomerId'
+        name:
+          type: string
+          description: Customer name
+        email:
+          type: string
+          description: Customer email
+    Product:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Product ID
+        name:
+          type: string
+          description: Product name
+        price:
+          type: number
+          description: Product price
+    NewCustomer:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Customer name
+        email:
+          type: string
+          description: Customer email
+        password:
+          type: string
+          description: Customer password
