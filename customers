@@ -1,0 +1,388 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.example.com
+
+info:
+  title: My Example API
+  version: 1.0.0
+  description: An example API for showcasing different endpoints
+
+paths:
+  /api/prov/v1/products:
+    get:
+      tags:
+        - products
+      description: Get a list of all products
+      parameters:
+        - name: limit
+          in: query
+          description: The number of products to return
+          required: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: The page number of the products list
+          required: false
+          schema:
+            type: integer
+      responses:
+        200:
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        500:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/prov/v1/products/{product_id}:
+    get:
+      tags:
+        - products
+      description: Get a specific product by its ID
+      parameters:
+        - name: product_id
+          in: path
+          description: The unique identifier for the product
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: The product details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: The product was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/prov/v1/products:
+    post:
+      tags:
+        - products
+      description: Create a new product
+      parameters:
+        - name: Authorization
+          in: header
+          description: The authorization token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        201:
+          description: The product was created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        400:
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/prov/v1/products/{product_id}:
+    put:
+      tags:
+        - products
+      description: Update a specific product by its ID
+      parameters:
+        - name: product_id
+          in: path
+          description: The unique identifier for the product
+          required: true
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          description: The authorization token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        200:
+          description: The product was updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        400:
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: The product was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/outlet/v1/locations:
+    get:
+      tags:
+        - locations
+      description: Get a list of all outlet locations
+      parameters:
+        - name: Authorization
+          in: header
+          description: The authorization token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of outlet locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        500:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/prov/v2/products:
+    get:
+      tags:
+        - products
+      description: Get a list of all products (version 2)
+      parameters:
+        - name: Authorization
+          in: header
+          description: The authorization token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        500:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/prov/v2/products/{product_id}:
+    get:
+      tags:
+        - products
+      description: Get a specific product by ID (version 2)
+      parameters:
+        - name: product_id
+          in: path
+          description: The ID of the product to retrieve
+          required: true
+          schema:
+            type: integer
+        - name: Authorization
+          in: header
+          description: The authorization token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: The requested product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        404:
+          description: The requested product was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    paths:
+  /api/prov/v2/orders:
+    post:
+      tags:
+        - orders
+      description: Create a new order
+      parameters:
+        - name: Authorization
+          in: header
+          description: The authorization token
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        201:
+          description: The created order
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        400:
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    paths:
+  /api/outlet/v2/locations:
+    get:
+      tags:
+        - locations
+      description: Get a list of all outlet locations (version 2)
+      parameters:
+        - name: Authorization
+          in: header
+          description: The authorization token
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A list of outlet locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+        500:
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier for the product
+        name:
+          type: string
+          description: The name of the product
+        price:
+          type: number
+          description: The price of the product
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: An error message
+    Brand:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier for the brand
+        name:
+          type: string
+          description: The name of the brand
+        description:
+          type: string
+          description: A brief description of the brand
+    Location:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier for the location
+        address:
+          type: string
+          description: The street address of the location
+        city:
+          type: string
+          description: The city of the location
+        state:
+          type: string
+          description: The state of the location
+        zipcode:
+          type: string
+          description: The zipcode of the location
+    Order:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        total_price:
+          type: number
+        customer_name:
+          type: string
+        customer_email:
+          type: string
+      required:
+        - products
+        - total_price
+        - customer_name
+        - customer_email
