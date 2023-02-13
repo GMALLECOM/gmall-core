@@ -1,12 +1,10 @@
 openapi: 3.0.0
 servers:
-  - url: https://api.example.com
-
+  - url: 'https://api.example.com'
 info:
   title: My Example API
   version: 1.0.0
   description: An example API for showcasing different endpoints
-
 paths:
   /api/prov/v1/products:
     get:
@@ -27,7 +25,7 @@ paths:
           schema:
             type: integer
       responses:
-        200:
+        '200':
           description: A list of products
           content:
             application/json:
@@ -35,44 +33,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product'
-        500:
+        '500':
           description: An error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /api/prov/v1/products/{product_id}:
-    get:
-      tags:
-        - products
-      description: Get a specific product by its ID
-      parameters:
-        - name: product_id
-          in: path
-          description: The unique identifier for the product
-          required: true
-          schema:
-            type: integer
-      responses:
-        200:
-          description: The product details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Product'
-        404:
-          description: The product was not found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: An error occurred
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /api/prov/v1/products:
     post:
       tags:
         - products
@@ -91,25 +57,55 @@ paths:
             schema:
               $ref: '#/components/schemas/Product'
       responses:
-        201:
+        '201':
           description: The product was created successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
-        400:
+        '400':
           description: Invalid request body
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: An error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-  /api/prov/v1/products/{product_id}:
+  '/api/prov/v1/products/{product_id}':
+    get:
+      tags:
+        - products
+      description: Get a specific product by its ID
+      parameters:
+        - name: product_id
+          in: path
+          description: The unique identifier for the product
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The product details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: The product was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: An error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
     put:
       tags:
         - products
@@ -134,25 +130,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Product'
       responses:
-        200:
+        '200':
           description: The product was updated successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
-        400:
+        '400':
           description: Invalid request body
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        404:
+        '404':
           description: The product was not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: An error occurred
           content:
             application/json:
@@ -171,7 +167,7 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
           description: A list of outlet locations
           content:
             application/json:
@@ -179,7 +175,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Location'
-        500:
+        '500':
           description: An error occurred
           content:
             application/json:
@@ -198,7 +194,7 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
           description: A list of products
           content:
             application/json:
@@ -206,14 +202,13 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product'
-        500:
+        '500':
           description: An error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
-  /api/prov/v2/products/{product_id}:
+  '/api/prov/v2/products/{product_id}':
     get:
       tags:
         - products
@@ -232,25 +227,25 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
           description: The requested product
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Product'
-        404:
+        '404':
           description: The requested product was not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: An error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    paths:
+    paths: null
   /api/prov/v2/orders:
     post:
       tags:
@@ -270,25 +265,25 @@ paths:
             schema:
               $ref: '#/components/schemas/Order'
       responses:
-        201:
+        '201':
           description: The created order
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Order'
-        400:
+        '400':
           description: Invalid request
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-        500:
+        '500':
           description: An error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-    paths:
+    paths: null
   /api/outlet/v2/locations:
     get:
       tags:
@@ -302,7 +297,7 @@ paths:
           schema:
             type: string
       responses:
-        200:
+        '200':
           description: A list of outlet locations
           content:
             application/json:
@@ -310,14 +305,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Location'
-        500:
+        '500':
           description: An error occurred
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-
-    
 components:
   schemas:
     Product:
