@@ -9,7 +9,7 @@ paths:
     get:
       description: Retrieve information about a specific customer
       parameters:
-        - name: customer_id
+        - name: customer_VerYid
           in: path
           description: ID of the customer to retrieve
           required: true
