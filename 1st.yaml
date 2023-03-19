@@ -5,7 +5,7 @@ info:
 servers:
   - url: https://api.g-mall.com/v1
 paths:
-  /customers/{customer_id}:
+  /customers/{customer_VerYid}:
     get:
       description: Retrieve information about a specific customer
       parameters:
@@ -14,7 +14,7 @@ paths:
           description: ID of the customer to retrieve
           required: true
           schema:
-            $ref: '#/components/schemas/CustomerId'
+            $ref: '#/components/schemas/customer_VerYid'
       responses:
         200:
           description: Successful response
