@@ -16,7 +16,7 @@ def get_product(product_id):
     return jsonify(product)
 
 # Sample endpoint to add a product to the shopping cart
-@app.route('/api/cart', methods=['POST'])
+@app.route('/api/cart', methods=['POST','OPTIONS'])
 def add_to_cart():
     # Extract product details from the request
     product_id = request.json.get('product_id')
